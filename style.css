@@ -314,7 +314,71 @@ nav {
     border-radius: 4px;
 }
 
-/* Accordion Component */
+/* NEW: Timeline Component for Experience */
+.timeline {
+    position: relative;
+    padding-left: 2.5rem; 
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 2rem;
+    bottom: 2rem;
+    width: 2px;
+    background-color: var(--accent-color);
+    opacity: 0.3;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -2.5rem;
+    top: 1.8rem; 
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--bg-primary);
+    border: 3px solid var(--accent-color);
+    box-shadow: 0 0 10px rgba(0, 119, 181, 0.5);
+    z-index: 2;
+}
+
+/* NEW: Education Break in Timeline */
+.timeline-break {
+    position: relative;
+    margin: 4rem 0;
+    height: 20px;
+}
+
+.timeline-break-label {
+    position: absolute;
+    left: calc(-2.5rem + 8px); 
+    transform: translateX(-50%);
+    background-color: var(--bg-primary);
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 2;
+    white-space: nowrap;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+/* Accordion Base */
 .accordion {
     display: flex;
     flex-direction: column;
@@ -516,7 +580,265 @@ nav {
     color: var(--accent-color);
 }
 
-/* NEW: Contact Grid */
+/* Compact Digital Projects Section */
+.compact-project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.compact-project-card {
+    background-color: var(--bg-primary);
+    border-radius: 8px;
+    border-top: 4px solid var(--accent-color);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.compact-project-card:hover {
+    transform: translateY(-5px);
+}
+
+.compact-project-info {
+    padding: 1.5rem 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.compact-project-info h3 {
+    margin: 0 0 0.2rem 0;
+    color: var(--text-primary);
+    font-size: 1.4rem;
+}
+
+.project-role {
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.compact-project-info p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.compact-bullets {
+    list-style-position: outside;
+    margin-left: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    flex-grow: 1; /* Pushes the button to the bottom evenly */
+}
+
+.compact-bullets li {
+    margin-bottom: 0.6rem;
+    line-height: 1.4;
+    font-size: 0.9rem;
+}
+
+/* Browser Mockup CSS (Scaled Down) */
+.browser-mockup {
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.05);
+    overflow: hidden;
+}
+
+.small-mockup {
+    margin: 2rem 2rem 0 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+.browser-header {
+    background-color: #2d2d2d;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.browser-header .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot.red { background-color: #ff5f56; }
+.dot.yellow { background-color: #ffbd2e; }
+.dot.green { background-color: #27c93f; }
+
+.browser-url {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1e1e1e;
+    color: #888;
+    font-size: 0.65rem;
+    padding: 2px 15px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+.browser-body {
+    width: 100%;
+    height: 180px; /* Forces a compact height */
+    background-color: #1e1e1e;
+    position: relative;
+}
+
+.browser-body img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top; /* Ensures the top of the website shows */
+}
+
+/* Interactive Slider Recommendations Section */
+#recommendations {
+    background-color: var(--bg-primary);
+}
+
+.slider-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    position: relative;
+    margin-top: 3rem;
+}
+
+.slider-container {
+    overflow: hidden;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.slider-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.testimonial-card {
+    background-color: var(--bg-secondary);
+    padding: 3rem 4rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 350px;
+}
+
+.quote-icon {
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    font-size: 6rem;
+    font-family: Georgia, serif;
+    color: rgba(0, 119, 181, 0.1); 
+    line-height: 1;
+}
+
+.quote-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+    font-style: italic;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding-top: 1.5rem;
+}
+
+.author-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: white;
+    padding: 4px;
+    object-fit: contain;
+}
+
+.testimonial-author h4 {
+    margin: 0 0 0.2rem 0;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+}
+
+.testimonial-author p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Slider Buttons */
+.slider-btn {
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider-btn:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+/* Slider Dots */
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 1.5rem;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: var(--accent-color);
+}
+
+/* Contact Grid */
 .contact-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -674,6 +996,15 @@ footer {
     .sticky-sidebar {
         position: static; 
     }
+
+    .featured-project, .featured-project.reverse-layout {
+        flex-direction: column;
+        gap: 3rem;
+    }
+    
+    .project-visual {
+        width: 100%;
+    }
 }
 
 @media (max-width: 768px) {
@@ -695,6 +1026,24 @@ footer {
         display: none; 
     }
     
+    .timeline {
+        padding-left: 1.5rem;
+    }
+    
+    .timeline::before {
+        left: 0;
+    }
+
+    .timeline-dot {
+        left: -1.5rem;
+        width: 12px;
+        height: 12px;
+    }
+
+    .timeline-break-label {
+        left: calc(-1.5rem + 1px);
+    }
+
     .job-header-left {
         flex-direction: column;
         align-items: flex-start;
@@ -717,147 +1066,7 @@ footer {
         align-items: flex-start;
         gap: 0.8rem;
     }
-    
-    .modal-content {
-        width: 95%;
-        height: 90vh;
-        margin: 10% auto;
-    }
-}
-/* NEW: Interactive Slider Recommendations Section */
-#recommendations {
-    background-color: var(--bg-primary);
-}
 
-.slider-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    position: relative;
-    margin-top: 3rem;
-}
-
-.slider-container {
-    overflow: hidden;
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-.slider-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.slide {
-    min-width: 100%;
-    box-sizing: border-box;
-}
-
-.testimonial-card {
-    background-color: var(--bg-secondary);
-    padding: 3rem 4rem;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 350px;
-}
-
-.quote-icon {
-    position: absolute;
-    top: 20px;
-    left: 40px;
-    font-size: 6rem;
-    font-family: Georgia, serif;
-    color: rgba(0, 119, 181, 0.1); 
-    line-height: 1;
-}
-
-.quote-text {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    color: var(--text-primary);
-    font-style: italic;
-    margin-bottom: 2rem;
-    position: relative;
-    z-index: 1;
-    max-width: 800px;
-}
-
-.testimonial-author {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    padding-top: 1.5rem;
-}
-
-.author-logo {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: white;
-    padding: 4px;
-    object-fit: contain;
-}
-
-.testimonial-author h4 {
-    margin: 0 0 0.2rem 0;
-    color: var(--accent-color);
-    font-size: 1.1rem;
-}
-
-.testimonial-author p {
-    margin: 0;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
-
-/* Slider Buttons */
-.slider-btn {
-    background-color: transparent;
-    color: var(--text-secondary);
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    transition: color 0.3s ease, transform 0.2s ease;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.slider-btn:hover {
-    color: var(--accent-color);
-    transform: scale(1.1);
-}
-
-/* Slider Dots */
-.slider-dots {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 1.5rem;
-}
-
-.dot {
-    width: 10px;
-    height: 10px;
-    background-color: rgba(255,255,255,0.2);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.dot.active {
-    background-color: var(--accent-color);
-}
-
-@media (max-width: 768px) {
     .testimonial-card {
         padding: 2rem 1.5rem;
     }
@@ -889,5 +1098,11 @@ footer {
     
     .slider-btn:hover {
         transform: translateY(-50%) scale(1.1);
+    }
+    
+    .modal-content {
+        width: 95%;
+        height: 90vh;
+        margin: 10% auto;
     }
 }
