@@ -87,7 +87,7 @@ document.querySelectorAll('.animate-bars').forEach(widget => {
 });
 
 
-// NEW: Back to Top Button Logic
+// Back to Top Button Logic
 const backToTopBtn = document.getElementById("backToTop");
 
 window.addEventListener("scroll", () => {
@@ -127,7 +127,9 @@ window.onclick = function(event) {
         closeModal();
     }
 }
-// NEW: Interactive Slideshow Logic
+
+
+// Interactive Slideshow Logic
 const track = document.getElementById('testimonialTrack');
 const slides = document.querySelectorAll('.slide');
 const dotsContainer = document.getElementById('sliderDots');
@@ -149,10 +151,8 @@ slides.forEach((_, index) => {
 const dots = document.querySelectorAll('.dot');
 
 function updateSlider() {
-    // Move track
     track.style.transform = `translateX(-${currentSlide * 100}%)`;
     
-    // Update dots
     dots.forEach(dot => dot.classList.remove('active'));
     dots[currentSlide].classList.add('active');
 }
@@ -168,7 +168,7 @@ function goToSlide(index) {
     updateSlider();
 }
 
-// Auto Scroll Logic (Changes every 8 seconds)
+// Auto Scroll Logic
 function startAutoSlide() {
     slideInterval = setInterval(() => {
         moveSlide(1);

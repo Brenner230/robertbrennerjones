@@ -314,7 +314,7 @@ nav {
     border-radius: 4px;
 }
 
-/* NEW: Timeline Component for Experience */
+/* Timeline Component for Experience */
 .timeline {
     position: relative;
     padding-left: 2.5rem; 
@@ -353,7 +353,7 @@ nav {
     z-index: 2;
 }
 
-/* NEW: Education Break in Timeline */
+/* Education Break in Timeline */
 .timeline-break {
     position: relative;
     margin: 4rem 0;
@@ -636,7 +636,7 @@ nav {
     margin-left: 1.2rem;
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
-    flex-grow: 1; /* Pushes the button to the bottom evenly */
+    flex-grow: 1; 
 }
 
 .compact-bullets li {
@@ -692,7 +692,7 @@ nav {
 
 .browser-body {
     width: 100%;
-    height: 180px; /* Forces a compact height */
+    height: 180px; 
     background-color: #1e1e1e;
     position: relative;
 }
@@ -702,7 +702,7 @@ nav {
     height: 100%;
     display: block;
     object-fit: cover;
-    object-position: top; /* Ensures the top of the website shows */
+    object-position: top; 
 }
 
 /* Interactive Slider Recommendations Section */
