@@ -21,8 +21,72 @@ document.querySelectorAll('.fade-in').forEach(element => {
     observer.observe(element);
 });
 
+// Dynamic Typing Effect for Hero
+const typedTextSpan = document.getElementById("typing-text");
+const textArray = ["Senior Business Development.", "Strategic Growth Leader.", "Business Development Manager at Verizon."];
+const typingDelay = 50;
+const erasingDelay = 30;
+const newTextDelay = 1200; 
+let textArrayIndex = 0;
+let charIndex = 0;
 
-// Accordion Logic for both Experience and Certifications
+function type() {
+  if (charIndex < textArray[textArrayIndex].length) {
+    typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+    charIndex++;
+    setTimeout(type, typingDelay);
+  } else {
+    if(textArrayIndex >= textArray.length - 1) return; // Stop on last phrase
+    setTimeout(erase, newTextDelay);
+  }
+}
+
+function erase() {
+  if (charIndex > 0) {
+    typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex-1);
+    charIndex--;
+    setTimeout(erase, erasingDelay);
+  } else {
+    textArrayIndex++;
+    setTimeout(type, typingDelay + 500);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  if(textArray.length) setTimeout(type, newTextDelay);
+});
+
+
+// Dark/Light Theme Toggle Logic
+const themeBtn = document.getElementById('theme-toggle');
+const sunIcon = document.querySelector('.sun-icon');
+const moonIcon = document.querySelector('.moon-icon');
+
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    sunIcon.style.display = 'block';
+    moonIcon.style.display = 'none';
+}
+
+themeBtn.addEventListener('click', () => {
+    let theme = document.documentElement.getAttribute('data-theme');
+    
+    if (theme === 'light') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+    }
+});
+
+
+// UPDATED: Accordion Logic (Now fills the adjacent timeline dot)
 const accordions = document.querySelectorAll('.accordion-header');
 
 accordions.forEach(acc => {
@@ -31,15 +95,48 @@ accordions.forEach(acc => {
         const content = this.nextElementSibling;
         const icon = this.querySelector('.accordion-icon');
         
+        // Find the corresponding timeline dot (if it exists)
+        const timelineItem = this.closest('.timeline-item');
+        const dot = timelineItem ? timelineItem.querySelector('.timeline-dot') : null;
+        
         if (content.style.maxHeight) {
+            // Close it
             content.style.maxHeight = null;
             if (icon) icon.textContent = '+';
+            if (dot) dot.classList.remove('active'); // Remove fill
         } else {
+            // Open it
             content.style.maxHeight = content.scrollHeight + "px";
             if (icon) icon.textContent = '−'; 
+            if (dot) dot.classList.add('active'); // Add fill
         }
     });
 });
+
+// Expand / Collapse All Button Logic
+function toggleAllAccordions(action) {
+    accordions.forEach(acc => {
+        const content = acc.nextElementSibling;
+        const icon = acc.querySelector('.accordion-icon');
+        const timelineItem = acc.closest('.timeline-item');
+        const dot = timelineItem ? timelineItem.querySelector('.timeline-dot') : null;
+        
+        if (action === 'expand') {
+            acc.classList.add('active');
+            content.style.maxHeight = content.scrollHeight + "px";
+            if (icon) icon.textContent = '−';
+            if (dot) dot.classList.add('active');
+        } else if (action === 'collapse') {
+            acc.classList.remove('active');
+            content.style.maxHeight = null;
+            if (icon) icon.textContent = '+';
+            if (dot) dot.classList.remove('active');
+        }
+    });
+}
+
+document.getElementById('expandAll').addEventListener('click', () => toggleAllAccordions('expand'));
+document.getElementById('collapseAll').addEventListener('click', () => toggleAllAccordions('collapse'));
 
 
 // Scrollspy (Active Nav Link Highlighting)
@@ -48,7 +145,6 @@ const navLinks = document.querySelectorAll('.nav-link');
 
 window.addEventListener('scroll', () => {
     let current = '';
-    
     const scrollY = window.scrollY + 150; 
 
     sections.forEach(section => {
@@ -152,7 +248,6 @@ const dots = document.querySelectorAll('.dot');
 
 function updateSlider() {
     track.style.transform = `translateX(-${currentSlide * 100}%)`;
-    
     dots.forEach(dot => dot.classList.remove('active'));
     dots[currentSlide].classList.add('active');
 }
@@ -168,7 +263,6 @@ function goToSlide(index) {
     updateSlider();
 }
 
-// Auto Scroll Logic
 function startAutoSlide() {
     slideInterval = setInterval(() => {
         moveSlide(1);
@@ -180,5 +274,81 @@ function resetAutoSlide() {
     startAutoSlide();
 }
 
-// Start the timer when page loads
 startAutoSlide();
+
+// Mobile Swipe Support for Slider
+let touchstartX = 0;
+let touchendX = 0;
+
+track.addEventListener('touchstart', e => {
+  touchstartX = e.changedTouches[0].screenX;
+  clearInterval(slideInterval); 
+}, {passive: true});
+
+track.addEventListener('touchend', e => {
+  touchendX = e.changedTouches[0].screenX;
+  handleSwipe();
+  startAutoSlide(); 
+}, {passive: true});
+
+function handleSwipe() {
+  if (touchendX < touchstartX - 50) {
+    moveSlide(1);
+  }
+  if (touchendX > touchstartX + 50) {
+    moveSlide(-1);
+  }
+}
+
+// AJAX Form Submission (Prevents Formspree Redirect)
+const contactForm = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
+const submitBtnText = document.getElementById('btn-text');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        submitBtnText.textContent = "Sending...";
+        
+        const data = new FormData(contactForm);
+        
+        try {
+            const response = await fetch(contactForm.action, {
+                method: contactForm.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                formStatus.innerHTML = "✅ Message sent successfully! I'll be in touch soon.";
+                formStatus.style.color = "var(--accent-color)";
+                formStatus.style.display = "block";
+                contactForm.reset();
+            } else {
+                formStatus.innerHTML = "❌ Oops! There was a problem submitting your form.";
+                formStatus.style.color = "red";
+                formStatus.style.display = "block";
+            }
+        } catch (error) {
+            formStatus.innerHTML = "❌ Oops! Network error. Please try again.";
+            formStatus.style.color = "red";
+            formStatus.style.display = "block";
+        }
+        
+        submitBtnText.textContent = "Send Message";
+        setTimeout(() => {
+            formStatus.style.display = "none";
+        }, 5000);
+    });
+}
+
+// Smooth scrolling for scroll indicator
+document.querySelector('.scroll-indicator').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector('#about').scrollIntoView({
+        behavior: 'smooth'
+    });
+});
