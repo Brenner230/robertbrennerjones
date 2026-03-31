@@ -262,10 +262,10 @@ nav {
     align-items: center;
     padding-top: 60px; 
     position: relative;
-    overflow: hidden; /* Contains the canvas */
+    overflow: hidden;
 }
 
-/* NEW: Telecom Network Canvas */
+/* Telecom Network Canvas */
 #networkCanvas {
     position: absolute;
     top: 0;
@@ -274,7 +274,7 @@ nav {
     height: 100%;
     z-index: 0;
     opacity: 0.8;
-    pointer-events: none; /* Allows clicks to pass through */
+    pointer-events: none; 
 }
 
 .hero-container {
@@ -287,7 +287,7 @@ nav {
     gap: 4rem;
     width: 100%;
     position: relative;
-    z-index: 1; /* Keeps text above canvas */
+    z-index: 1; 
 }
 
 .hero-text {
@@ -304,7 +304,7 @@ nav {
     color: var(--text-secondary);
     text-align: left;
     margin-bottom: 1.5rem;
-    min-height: 2.2rem; /* Prevents layout jump when typing starts */
+    min-height: 2.2rem; 
 }
 
 /* Typing Effect Cursor */
@@ -401,7 +401,7 @@ nav {
     justify-content: center;
 }
 
-/* NEW: Magnetic Button Hover Class */
+/* Magnetic Button Hover Class */
 .magnetic-btn {
     transition: transform 0.1s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     will-change: transform;
@@ -466,6 +466,57 @@ nav {
     color: var(--text-secondary);
 }
 
+/* NEW: Dynamic Metrics Grid */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+}
+
+.metric-card {
+    background-color: var(--bg-secondary);
+    padding: 2.5rem 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    border-top: 4px solid var(--accent-color);
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* NEW: Flexbox alignment to perfectly center varying text lengths */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%; 
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+}
+
+.metric-number {
+    font-size: 3.5rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.metric-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 0.8rem; /* Increased slightly for breathing room */
+    line-height: 1.4;
+}
+
+.metric-subtext {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0; /* Resets default paragraph margin for perfect centering */
+}
+
 /* Timeline Component */
 .timeline {
     position: relative;
@@ -511,7 +562,7 @@ nav {
     box-shadow: 0 0 15px var(--accent-color);
 }
 
-/* Education Break in Timeline */
+/* Section Breaks in Timeline */
 .timeline-break {
     position: relative;
     margin: 4rem 0;
@@ -761,7 +812,7 @@ nav {
     box-shadow: 0 4px 15px var(--shadow-color);
     display: flex;
     flex-direction: column;
-    overflow: visible; /* Prevent cutting off 3D rotation */
+    overflow: visible; 
     transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 

@@ -21,7 +21,7 @@ document.querySelectorAll('.fade-in').forEach(element => {
     observer.observe(element);
 });
 
-// NEW: Telecommunications Network Canvas Logic
+// Telecom Network Canvas Logic
 const canvas = document.getElementById('networkCanvas');
 if (canvas) {
     const ctx = canvas.getContext('2d');
@@ -108,8 +108,7 @@ if (canvas) {
     window.addEventListener('resize', initNetwork);
 }
 
-
-// NEW: Magnetic Buttons Logic
+// Magnetic Buttons Logic
 const magneticBtns = document.querySelectorAll('.magnetic-btn');
 magneticBtns.forEach(btn => {
     btn.addEventListener('mousemove', e => {
@@ -126,8 +125,7 @@ magneticBtns.forEach(btn => {
     });
 });
 
-
-// NEW: 3D Tilt Logic for Browser Mockups
+// 3D Tilt Logic for Browser Mockups
 const tiltMockups = document.querySelectorAll('.tilt-mockup');
 tiltMockups.forEach(mockup => {
     mockup.addEventListener('mousemove', e => {
@@ -214,7 +212,7 @@ themeBtn.addEventListener('click', () => {
 });
 
 
-// Accordion Logic
+// Accordion Logic (With Dynamic Dots)
 const accordions = document.querySelectorAll('.accordion-header');
 
 accordions.forEach(acc => {
@@ -223,7 +221,7 @@ accordions.forEach(acc => {
         const content = this.nextElementSibling;
         const icon = this.querySelector('.accordion-icon');
         
-        // Find the corresponding timeline dot (if it exists)
+        // Find the corresponding timeline dot
         const timelineItem = this.closest('.timeline-item');
         const dot = timelineItem ? timelineItem.querySelector('.timeline-dot') : null;
         
@@ -309,6 +307,41 @@ document.querySelectorAll('.animate-bars').forEach(widget => {
 });
 
 
+// NEW: Dynamic Number Counter Animation Logic
+const counters = document.querySelectorAll('.counter');
+const counterSpeed = 100; // Lower is faster
+
+const counterObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const counter = entry.target;
+            
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const decimals = counter.getAttribute('data-decimals') ? parseInt(counter.getAttribute('data-decimals')) : 0;
+                
+                const inc = target / counterSpeed;
+
+                if (count < target) {
+                    counter.innerText = (count + inc).toFixed(decimals);
+                    setTimeout(updateCount, 15);
+                } else {
+                    counter.innerText = target.toFixed(decimals);
+                }
+            };
+            
+            updateCount();
+            observer.unobserve(counter);
+        }
+    });
+}, { threshold: 0.5 });
+
+counters.forEach(counter => {
+    counterObserver.observe(counter);
+});
+
+
 // Back to Top Button Logic
 const backToTopBtn = document.getElementById("backToTop");
 
@@ -370,12 +403,12 @@ slides.forEach((_, index) => {
     dotsContainer.appendChild(dot);
 });
 
-const dots = document.querySelectorAll('.dot');
+const testimonialDots = document.querySelectorAll('#sliderDots .dot');
 
 function updateSlider() {
     track.style.transform = `translateX(-${currentSlide * 100}%)`;
-    dots.forEach(dot => dot.classList.remove('active'));
-    dots[currentSlide].classList.add('active');
+    testimonialDots.forEach(dot => dot.classList.remove('active'));
+    testimonialDots[currentSlide].classList.add('active');
 }
 
 function moveSlide(direction) {
