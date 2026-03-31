@@ -15,7 +15,7 @@
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230077b5'/><rect width='90' height='90' x='5' y='5' rx='15' fill='none' stroke='white' stroke-width='3'/><text x='28%' y='32%' font-family='sans-serif' font-weight='bold' font-size='32' fill='white' dominant-baseline='middle' text-anchor='middle'>R</text><text x='50%' y='50%' font-family='sans-serif' font-weight='bold' font-size='32' fill='white' dominant-baseline='middle' text-anchor='middle'>B</text><text x='72%' y='68%' font-family='sans-serif' font-weight='bold' font-size='32' fill='white' dominant-baseline='middle' text-anchor='middle'>J</text></svg>">
     
-    <link rel="stylesheet" href="./style.css?v=3.3">
+    <link rel="stylesheet" href="./style.css?v=3.4">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -51,14 +51,16 @@
     </nav>
 
     <header id="hero">
+        <canvas id="networkCanvas"></canvas>
+        
         <div class="hero-container">
             <div class="hero-text fade-in">
                 <h1>Brenner Jones</h1>
                 <h2 class="typing-container"><span id="typing-text"></span><span class="cursor">|</span></h2>
                 <p>Driving growth, strategic partnerships, and delivering impactful solutions in the telecommunications and technology sectors.</p>
                 <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Get in Touch</a>
-                    <a href="./images/Robert-Jones-Resume.pdf" download="Robert-Brenner-Jones-Resume.pdf" class="btn btn-secondary">Download Resume</a>
+                    <a href="#contact" class="btn btn-primary magnetic-btn">Get in Touch</a>
+                    <a href="./images/Robert-Jones-Resume.pdf" download="Robert-Brenner-Jones-Resume.pdf" class="btn btn-secondary magnetic-btn">Download Resume</a>
                 </div>
             </div>
             
@@ -405,7 +407,7 @@
             <div class="compact-project-grid">
                 
                 <div class="compact-project-card">
-                    <div class="browser-mockup small-mockup">
+                    <div class="browser-mockup small-mockup tilt-mockup">
                         <div class="browser-header">
                             <span class="dot red"></span>
                             <span class="dot yellow"></span>
@@ -424,7 +426,7 @@
                             <li>Executed full-stack website development and UI/UX design.</li>
                             <li>Implemented organic SEO keyword optimization to capture high-intent local search traffic.</li>
                         </ul>
-                        <a href="https://elitegoldescapes.com" target="_blank" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 0.5rem; justify-content: center;">
+                        <a href="https://elitegoldescapes.com" target="_blank" class="btn btn-outline btn-sm magnetic-btn" style="display: inline-flex; align-items: center; gap: 0.5rem; justify-content: center;">
                             Visit Live Site
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                         </a>
@@ -432,7 +434,7 @@
                 </div>
 
                 <div class="compact-project-card">
-                    <div class="browser-mockup small-mockup">
+                    <div class="browser-mockup small-mockup tilt-mockup">
                         <div class="browser-header">
                             <span class="dot red"></span>
                             <span class="dot yellow"></span>
@@ -451,7 +453,7 @@
                             <li>Implemented advanced code enhancements and integrated dynamic new web sections.</li>
                             <li>Drastically improved search engine rankings and visibility through targeted technical SEO.</li>
                         </ul>
-                        <a href="https://epsdmv.com" target="_blank" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 0.5rem; justify-content: center;">
+                        <a href="https://epsdmv.com" target="_blank" class="btn btn-outline btn-sm magnetic-btn" style="display: inline-flex; align-items: center; gap: 0.5rem; justify-content: center;">
                             Visit Live Site
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                         </a>
@@ -658,7 +660,7 @@
                             <label for="message">Message</label>
                             <textarea id="message" name="message" rows="5" required placeholder="How can we work together?"></textarea>
                         </div>
-                        <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%;">
+                        <button type="submit" id="submit-btn" class="btn btn-primary magnetic-btn" style="width: 100%;">
                             <span id="btn-text">Send Message</span>
                         </button>
                         
@@ -674,7 +676,7 @@
         <p>&copy; <span id="year"></span> Brenner Jones. All rights reserved.</p>
     </footer>
 
-    <button id="backToTop" class="back-to-top" title="Go to top">
+    <button id="backToTop" class="back-to-top magnetic-btn" title="Go to top">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
     </button>
 
@@ -685,6 +687,6 @@
         </div>
     </div>
 
-    <script src="./script.js?v=3.3"></script>
+    <script src="./script.js?v=3.4"></script>
 </body>
 </html>

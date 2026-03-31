@@ -21,6 +21,134 @@ document.querySelectorAll('.fade-in').forEach(element => {
     observer.observe(element);
 });
 
+// NEW: Telecommunications Network Canvas Logic
+const canvas = document.getElementById('networkCanvas');
+if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let width, height, particles;
+
+    function initNetwork() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        particles = [];
+        // Generate nodes based on screen size so it isn't crowded on mobile
+        let particleCount = window.innerWidth > 768 ? 60 : 30; 
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 1.5,
+                vy: (Math.random() - 0.5) * 1.5,
+                radius: Math.random() * 2 + 1
+            });
+        }
+    }
+
+    let mouse = { x: null, y: null };
+    window.addEventListener('mousemove', e => {
+        mouse.x = e.x;
+        mouse.y = e.y;
+    });
+
+    function animateNetwork() {
+        ctx.clearRect(0, 0, width, height);
+        
+        // Dynamically check theme to adjust colors
+        let isLightMode = document.documentElement.getAttribute('data-theme') === 'light';
+        let particleColor = isLightMode ? 'rgba(0, 119, 181, 0.5)' : 'rgba(0, 119, 181, 0.8)';
+        let lineColor = isLightMode ? 'rgba(0, 119, 181, ' : 'rgba(255, 255, 255, ';
+
+        particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+
+            // Bounce off walls
+            if (p.x < 0 || p.x > width) p.vx *= -1;
+            if (p.y < 0 || p.y > height) p.vy *= -1;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = particleColor;
+            ctx.fill();
+
+            // Connect to mouse
+            if (mouse.x != null) {
+                let dx = mouse.x - p.x;
+                let dy = mouse.y - p.y;
+                let dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 150) {
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    ctx.strokeStyle = `${lineColor}${1 - dist/150})`;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+            }
+
+            // Connect to other particles
+            particles.forEach(p2 => {
+                let dx = p.x - p2.x;
+                let dy = p.y - p2.y;
+                let dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < 100) {
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.strokeStyle = `${lineColor}${0.3 - dist/300})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            });
+        });
+        requestAnimationFrame(animateNetwork);
+    }
+    initNetwork();
+    animateNetwork();
+    window.addEventListener('resize', initNetwork);
+}
+
+
+// NEW: Magnetic Buttons Logic
+const magneticBtns = document.querySelectorAll('.magnetic-btn');
+magneticBtns.forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+        const rect = btn.getBoundingClientRect();
+        const h = rect.width / 2;
+        const v = rect.height / 2;
+        const x = e.clientX - rect.left - h;
+        const y = e.clientY - rect.top - v;
+        
+        btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+        btn.style.transform = `translate(0px, 0px)`;
+    });
+});
+
+
+// NEW: 3D Tilt Logic for Browser Mockups
+const tiltMockups = document.querySelectorAll('.tilt-mockup');
+tiltMockups.forEach(mockup => {
+    mockup.addEventListener('mousemove', e => {
+        const rect = mockup.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = ((y - centerY) / centerY) * -10; 
+        const rotateY = ((x - centerX) / centerX) * 10;
+        
+        mockup.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    });
+    
+    mockup.addEventListener('mouseleave', () => {
+        mockup.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+    });
+});
+
+
 // Dynamic Typing Effect for Hero
 const typedTextSpan = document.getElementById("typing-text");
 const textArray = ["Senior Business Development.", "Strategic Growth Leader.", "Business Development Manager at Verizon."];
@@ -86,7 +214,7 @@ themeBtn.addEventListener('click', () => {
 });
 
 
-// UPDATED: Accordion Logic (Now fills the adjacent timeline dot)
+// Accordion Logic
 const accordions = document.querySelectorAll('.accordion-header');
 
 accordions.forEach(acc => {
@@ -100,15 +228,13 @@ accordions.forEach(acc => {
         const dot = timelineItem ? timelineItem.querySelector('.timeline-dot') : null;
         
         if (content.style.maxHeight) {
-            // Close it
             content.style.maxHeight = null;
             if (icon) icon.textContent = '+';
-            if (dot) dot.classList.remove('active'); // Remove fill
+            if (dot) dot.classList.remove('active'); 
         } else {
-            // Open it
             content.style.maxHeight = content.scrollHeight + "px";
             if (icon) icon.textContent = '−'; 
-            if (dot) dot.classList.add('active'); // Add fill
+            if (dot) dot.classList.add('active'); 
         }
     });
 });

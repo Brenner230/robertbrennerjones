@@ -262,6 +262,19 @@ nav {
     align-items: center;
     padding-top: 60px; 
     position: relative;
+    overflow: hidden; /* Contains the canvas */
+}
+
+/* NEW: Telecom Network Canvas */
+#networkCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.8;
+    pointer-events: none; /* Allows clicks to pass through */
 }
 
 .hero-container {
@@ -273,6 +286,8 @@ nav {
     padding: 0 2rem;
     gap: 4rem;
     width: 100%;
+    position: relative;
+    z-index: 1; /* Keeps text above canvas */
 }
 
 .hero-text {
@@ -289,6 +304,7 @@ nav {
     color: var(--text-secondary);
     text-align: left;
     margin-bottom: 1.5rem;
+    min-height: 2.2rem; /* Prevents layout jump when typing starts */
 }
 
 /* Typing Effect Cursor */
@@ -347,6 +363,7 @@ nav {
     text-transform: uppercase;
     letter-spacing: 1px;
     opacity: 0.8;
+    z-index: 1;
 }
 
 .scroll-indicator:hover {
@@ -382,6 +399,12 @@ nav {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+}
+
+/* NEW: Magnetic Button Hover Class */
+.magnetic-btn {
+    transition: transform 0.1s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    will-change: transform;
 }
 
 .btn-primary {
@@ -469,7 +492,6 @@ nav {
     margin-bottom: 0;
 }
 
-/* UPDATED: Dynamic Timeline Dots */
 .timeline-dot {
     position: absolute;
     left: -2.5rem;
@@ -739,7 +761,7 @@ nav {
     box-shadow: 0 4px 15px var(--shadow-color);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: visible; /* Prevent cutting off 3D rotation */
     transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -789,7 +811,7 @@ nav {
     font-size: 0.9rem;
 }
 
-/* Browser Mockup */
+/* Browser Mockup & 3D Tilt Class */
 .browser-mockup {
     border-radius: 6px;
     border: 1px solid var(--border-color-heavy);
@@ -799,6 +821,12 @@ nav {
 .small-mockup {
     margin: 2rem 2rem 0 2rem;
     box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.tilt-mockup {
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
 }
 
 .browser-header {
