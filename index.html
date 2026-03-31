@@ -15,12 +15,23 @@
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230077b5'/><rect width='90' height='90' x='5' y='5' rx='15' fill='none' stroke='white' stroke-width='3'/><text x='28%' y='32%' font-family='sans-serif' font-weight='bold' font-size='32' fill='white' dominant-baseline='middle' text-anchor='middle'>R</text><text x='50%' y='50%' font-family='sans-serif' font-weight='bold' font-size='32' fill='white' dominant-baseline='middle' text-anchor='middle'>B</text><text x='72%' y='68%' font-family='sans-serif' font-weight='bold' font-size='32' fill='white' dominant-baseline='middle' text-anchor='middle'>J</text></svg>">
     
-    <link rel="stylesheet" href="./style.css?v=4.0">
+    <link rel="stylesheet" href="./style.css?v=6.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <div id="scroll-progress-container">
+        <div id="scroll-progress-bar"></div>
+    </div>
+
+    <div class="floating-social">
+        <a href="https://www.linkedin.com/in/robertjones1998/" target="_blank" class="floating-btn linkedin" title="Connect on LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>Connect</span>
+        </a>
+    </div>
 
     <nav>
         <div class="nav-content">
@@ -34,17 +45,10 @@
                 <li><a href="#contact" class="nav-link">Contact</a></li>
                 
                 <li>
-                    <button id="theme-toggle" class="theme-btn" aria-label="Toggle Dark/Light Mode">
+                    <button id="theme-toggle" class="theme-btn magnetic-btn" aria-label="Toggle Dark/Light Mode">
                         <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                         <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                     </button>
-                </li>
-
-                <li>
-                    <a href="https://www.linkedin.com/in/robertjones1998/" target="_blank" class="linkedin-nav-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        LinkedIn
-                    </a>
                 </li>
             </ul>
         </div>
@@ -92,7 +96,7 @@
             <div class="metrics-grid">
                 
                 <div class="metric-card magnetic-btn">
-                    <h3 class="metric-number"><span class="counter" data-target="2" data-decimals="0">2</span></h3>
+                    <h3 class="metric-number"><span class="counter" data-target="2" data-decimals="0">0</span></h3>
                     <span class="metric-label">Start-Up Segments Deployed</span>
                     <p class="metric-subtext">New Channels Launched at Multi-Billion Dollar Corporations</p>
                 </div>
@@ -104,13 +108,13 @@
                 </div>
 
                 <div class="metric-card magnetic-btn">
-                    <h3 class="metric-number">$<span class="counter" data-target="15" data-decimals="0">$15M</span>M+</h3>
-                    <span class="metric-label">Qualified SLED Pipeline Built</span>
-                    <p class="metric-subtext">at Softtek Integration Systems, inc.</p>
+                    <h3 class="metric-number">$<span class="counter" data-target="15" data-decimals="0">0</span>M+</h3>
+                    <span class="metric-label">Qualified Pipeline Built</span>
+                    <p class="metric-subtext">Generated Net-New SLED & Enterprise IT Deals at Softtek Integration Systems, Inc.</p>
                 </div>
 
                 <div class="metric-card magnetic-btn">
-                    <h3 class="metric-number"><span class="counter" data-target="6" data-decimals="0">6</span>+</h3>
+                    <h3 class="metric-number"><span class="counter" data-target="6" data-decimals="0">0</span>+</h3>
                     <span class="metric-label">Years Experience</span>
                     <p class="metric-subtext">Enterprise & SLED Sales</p>
                 </div>
@@ -355,76 +359,87 @@
         <div class="sidebar-column">
             <aside class="sticky-sidebar">
                 
-                <div class="sidebar-widget animate-bars">
-                    <h3>CRM Proficiency</h3>
-                    
-                    <div class="skill-group">
-                        <div class="skill-info">
-                            <span>Salesforce</span>
-                            <span>Expert</span>
+                <div class="sidebar-widget">
+                    <h3>Tech Stack & Systems</h3>
+                    <div class="tech-stack-grid">
+                        
+                        <div class="tech-card magnetic-btn">
+                            <div class="tech-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg>
+                            </div>
+                            <div class="tech-info">
+                                <span class="tech-name">Salesforce</span>
+                                <span class="tech-level">Expert</span>
+                            </div>
                         </div>
-                        <div class="progress-bar"><div class="progress" data-width="95%"></div></div>
-                    </div>
 
-                    <div class="skill-group">
-                        <div class="skill-info">
-                            <span>Microsoft Dynamics</span>
-                            <span>Expert</span>
+                        <div class="tech-card magnetic-btn">
+                            <div class="tech-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                            </div>
+                            <div class="tech-info">
+                                <span class="tech-name">Microsoft Dynamics</span>
+                                <span class="tech-level">Expert</span>
+                            </div>
                         </div>
-                        <div class="progress-bar"><div class="progress" data-width="95%"></div></div>
-                    </div>
 
-                    <div class="skill-group">
-                        <div class="skill-info">
-                            <span>HubSpot / Outreach</span>
-                            <span>Highly Proficient</span>
+                        <div class="tech-card magnetic-btn">
+                            <div class="tech-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                            </div>
+                            <div class="tech-info">
+                                <span class="tech-name">HubSpot / Outreach</span>
+                                <span class="tech-level">Highly Proficient</span>
+                            </div>
                         </div>
-                        <div class="progress-bar"><div class="progress" data-width="85%"></div></div>
+
+                        <div class="tech-card magnetic-btn">
+                            <div class="tech-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                            </div>
+                            <div class="tech-info">
+                                <span class="tech-name">Microsoft 365 Suite</span>
+                                <span class="tech-level">Expert</span>
+                            </div>
+                        </div>
+
+                        <div class="tech-card magnetic-btn">
+                            <div class="tech-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                            </div>
+                            <div class="tech-info">
+                                <span class="tech-name">Google Workspace</span>
+                                <span class="tech-level">Highly Proficient</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <div class="sidebar-widget animate-bars">
+                <div class="sidebar-widget">
                     <h3>Core Competencies</h3>
-                    
-                    <div class="skill-group">
-                        <div class="skill-info">
+                    <ul class="competency-list">
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                             <span>Enterprise B2B Sales</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="progress-bar"><div class="progress" data-width="95%"></div></div>
-                    </div>
-
-                    <div class="skill-group">
-                        <div class="skill-info">
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                             <span>Pipeline Management</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="progress-bar"><div class="progress" data-width="90%"></div></div>
-                    </div>
-
-                    <div class="skill-group">
-                        <div class="skill-info">
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                             <span>Strategic Partnerships</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="progress-bar"><div class="progress" data-width="90%"></div></div>
-                    </div>
-
-                    <div class="skill-group">
-                        <div class="skill-info">
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                             <span>Contract Negotiation</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="progress-bar"><div class="progress" data-width="85%"></div></div>
-                    </div>
-
-                    <div class="skill-group">
-                        <div class="skill-info">
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                             <span>SEO & Web Development</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="progress-bar"><div class="progress" data-width="80%"></div></div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
 
             </aside>
@@ -719,6 +734,6 @@
         </div>
     </div>
 
-    <script src="./script.js?v=4.0"></script>
+    <script src="./script.js?v=6.0"></script>
 </body>
 </html>

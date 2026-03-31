@@ -21,6 +21,15 @@ document.querySelectorAll('.fade-in').forEach(element => {
     observer.observe(element);
 });
 
+
+// NEW: Global Scroll Progress Bar
+window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById("scroll-progress-bar").style.width = scrolled + "%";
+});
+
 // Telecom Network Canvas Logic
 const canvas = document.getElementById('networkCanvas');
 if (canvas) {
@@ -31,7 +40,6 @@ if (canvas) {
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
         particles = [];
-        // Generate nodes based on screen size so it isn't crowded on mobile
         let particleCount = window.innerWidth > 768 ? 60 : 30; 
         for (let i = 0; i < particleCount; i++) {
             particles.push({
@@ -53,7 +61,6 @@ if (canvas) {
     function animateNetwork() {
         ctx.clearRect(0, 0, width, height);
         
-        // Dynamically check theme to adjust colors
         let isLightMode = document.documentElement.getAttribute('data-theme') === 'light';
         let particleColor = isLightMode ? 'rgba(0, 119, 181, 0.5)' : 'rgba(0, 119, 181, 0.8)';
         let lineColor = isLightMode ? 'rgba(0, 119, 181, ' : 'rgba(255, 255, 255, ';
@@ -62,7 +69,6 @@ if (canvas) {
             p.x += p.vx;
             p.y += p.vy;
 
-            // Bounce off walls
             if (p.x < 0 || p.x > width) p.vx *= -1;
             if (p.y < 0 || p.y > height) p.vy *= -1;
 
@@ -71,7 +77,6 @@ if (canvas) {
             ctx.fillStyle = particleColor;
             ctx.fill();
 
-            // Connect to mouse
             if (mouse.x != null) {
                 let dx = mouse.x - p.x;
                 let dy = mouse.y - p.y;
@@ -86,7 +91,6 @@ if (canvas) {
                 }
             }
 
-            // Connect to other particles
             particles.forEach(p2 => {
                 let dx = p.x - p2.x;
                 let dy = p.y - p2.y;
@@ -221,7 +225,6 @@ accordions.forEach(acc => {
         const content = this.nextElementSibling;
         const icon = this.querySelector('.accordion-icon');
         
-        // Find the corresponding timeline dot
         const timelineItem = this.closest('.timeline-item');
         const dot = timelineItem ? timelineItem.querySelector('.timeline-dot') : null;
         
@@ -289,49 +292,37 @@ window.addEventListener('scroll', () => {
 });
 
 
-// Animate Progress Bars on Scroll
-const progressObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const bars = entry.target.querySelectorAll('.progress');
-            bars.forEach(bar => {
-                bar.style.width = bar.getAttribute('data-width');
-            });
-            observer.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.2 });
-
-document.querySelectorAll('.animate-bars').forEach(widget => {
-    progressObserver.observe(widget);
-});
-
-
-// NEW: Dynamic Number Counter Animation Logic
+// UPDATED: Completely Rewritten Counter Animation Logic
 const counters = document.querySelectorAll('.counter');
-const counterSpeed = 100; // Lower is faster
+const animationDuration = 2000; // 2 seconds to count up
 
 const counterObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             const counter = entry.target;
+            const target = +counter.getAttribute('data-target');
+            const decimals = counter.getAttribute('data-decimals') ? parseInt(counter.getAttribute('data-decimals')) : 0;
             
-            const updateCount = () => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const decimals = counter.getAttribute('data-decimals') ? parseInt(counter.getAttribute('data-decimals')) : 0;
+            let startTimestamp = null;
+            
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / animationDuration, 1);
                 
-                const inc = target / counterSpeed;
-
-                if (count < target) {
-                    counter.innerText = (count + inc).toFixed(decimals);
-                    setTimeout(updateCount, 15);
+                // Ease out quad for smooth deceleration
+                const easeProgress = progress * (2 - progress);
+                const currentVal = (easeProgress * target).toFixed(decimals);
+                
+                counter.innerText = currentVal;
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
                 } else {
                     counter.innerText = target.toFixed(decimals);
                 }
             };
             
-            updateCount();
+            window.requestAnimationFrame(step);
             observer.unobserve(counter);
         }
     });
@@ -391,7 +382,6 @@ const dotsContainer = document.getElementById('sliderDots');
 let currentSlide = 0;
 let slideInterval;
 
-// Initialize Dots
 slides.forEach((_, index) => {
     const dot = document.createElement('div');
     dot.classList.add('dot');
@@ -510,4 +500,16 @@ document.querySelector('.scroll-indicator').addEventListener('click', function(e
     document.querySelector('#about').scrollIntoView({
         behavior: 'smooth'
     });
+});
+
+// Fade out the Scroll Indicator when user scrolls down
+const scrollIndicator = document.querySelector('.scroll-indicator');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+        scrollIndicator.style.opacity = '0';
+        scrollIndicator.style.pointerEvents = 'none'; // Prevents clicking when invisible
+    } else {
+        scrollIndicator.style.opacity = '0.8';
+        scrollIndicator.style.pointerEvents = 'auto';
+    }
 });
