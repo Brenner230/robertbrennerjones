@@ -513,3 +513,40 @@ window.addEventListener('scroll', () => {
         scrollIndicator.style.pointerEvents = 'auto';
     }
 });
+
+// --- vCard Generator Logic ---
+const vcardBtn = document.getElementById('download-vcard');
+
+if (vcardBtn) {
+    vcardBtn.addEventListener('click', () => {
+        // Define the vCard content
+        // Note: The formatting and lack of indentation on the lines below is intentional for the .vcf file structure
+        const vcardData = `BEGIN:VCARD
+VERSION:3.0
+N:Jones;Brenner;;;
+FN:Brenner Jones
+ORG:Verizon
+TITLE:Business Development Manager
+TEL;TYPE=CELL,VOICE:+12404756725
+EMAIL;TYPE=PREF,INTERNET:me@robertbrennerjones.com
+URL:https://robertbrennerjones.com/
+END:VCARD`;
+
+        // Create a Blob from the vCard string
+        const blob = new Blob([vcardData], { type: 'text/vcard' });
+        const url = window.URL.createObjectURL(blob);
+        
+        // Create a temporary link element to trigger the download
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'Brenner_Jones.vcf'; // The filename that will be downloaded
+        
+        // Append, click, and clean up
+        document.body.appendChild(a);
+        a.click();
+        
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+    });
+}

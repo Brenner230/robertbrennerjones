@@ -156,6 +156,76 @@ a:hover {
 .floating-btn.linkedin:hover svg {
     fill: white;
 }
+/* --- DROPDOWN MENU STYLES --- */
+.nav-menu ul li {
+    position: relative;
+}
+
+.has-dropdown > a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--white);
+    min-width: 250px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    border-top: 3px solid var(--safety-orange);
+    flex-direction: column !important; /* Overrides default nav flex row */
+    padding: 10px 0;
+    z-index: 2000;
+}
+
+.nav-menu ul li:hover .dropdown {
+    display: flex;
+}
+
+.dropdown li {
+    width: 100%;
+}
+
+.dropdown a {
+    display: block;
+    padding: 10px 20px;
+    color: var(--steel-grey);
+    font-weight: 400;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdown a:hover, .dropdown a.active-page {
+    background-color: var(--light-bg);
+    color: var(--safety-orange);
+    padding-left: 25px; /* Slight indent animation on hover */
+}
+
+.dropdown-header {
+    padding: 10px 20px 5px 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary-navy);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Update Mobile Menu for Dropdowns */
+@media (max-width: 768px) {
+    .dropdown {
+        position: static;
+        display: flex;
+        box-shadow: none;
+        border-top: none;
+        border-left: 3px solid var(--safety-orange);
+        padding: 0;
+        margin-left: 15px;
+        background-color: #f9f9f9;
+    }
+}
 
 /* Navigation & Theme Toggle */
 nav {
@@ -1505,5 +1575,17 @@ footer {
         width: 95%;
         height: 90vh;
         margin: 10% auto;
+    }
+}
+
+/* --- vCard Button Styles --- */
+.mobile-vcard-container {
+    display: none; /* Hidden on desktop */
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 900px) {
+    .mobile-vcard-container {
+        display: block; /* Visible on mobile and tablet */
     }
 }
